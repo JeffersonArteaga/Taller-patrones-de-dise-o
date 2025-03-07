@@ -1,0 +1,54 @@
+INTERFAZ ISavingsAccount
+    MÉTODO deposit(amount)
+    MÉTODO withdraw(amount)
+
+CLASE SavingsAccount IMPLEMENTA ISavingsAccount
+    ATRIBUTO balance ← 0
+
+    MÉTODO deposit(amount)
+        balance ← balance + amount
+        IMPRIMIR "Depósito: $" + amount + ", Saldo: $" + balance
+
+    MÉTODO withdraw(amount)
+        SI amount > balance ENTONCES
+            IMPRIMIR "Fondos insuficientes."
+        SINO
+            balance ← balance - amount
+            IMPRIMIR "Retiro: $" + amount + ", Saldo: $" + balance
+
+CLASE SavingsAccountDecorator IMPLEMENTA ISavingsAccount
+    ATRIBUTO account
+
+    CONSTRUCTOR(account)
+        this.account ← account
+
+    MÉTODO deposit(amount)
+        account.deposit(amount)
+
+    MÉTODO withdraw(amount)
+        account.withdraw(amount)
+
+CLASE WithdrawalLimitDecorator EXTIENDE SavingsAccountDecorator
+    ATRIBUTO withdrawals ← 0
+
+    MÉTODO withdraw(amount)
+        SI withdrawals >= 2 ENTONCES
+            IMPRIMIR "Máximo 2 retiros por semana."
+        SINO
+            withdrawals ← withdrawals + 1
+            SUPER.withdraw(amount)
+
+CLASE WithdrawalAuthorizationDecorator EXTIENDE SavingsAccountDecorator
+    MÉTODO withdraw(amount)
+        SI amount > 1000 ENTONCES
+            IMPRIMIR "Autorización requerida para retiros > $1000."
+        SINO
+            SUPER.withdraw(amount)
+
+CLASE AntiMoneyLaunderingDecorator EXTIENDE SavingsAccountDecorator
+    MÉTODO deposit(amount)
+        SI amount > 5000 ENTONCES
+            IMPRIMIR "ALERTA: Depósito reportado."
+        FIN SI
+        SUPER.deposit(amount)
+
