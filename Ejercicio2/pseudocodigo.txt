@@ -1,0 +1,49 @@
+Clase InterestCalculation
+    Método abstracto calcular(monto, cuotas)
+
+Clase VisaStrategy extiende InterestCalculation
+    Método calcular(monto, cuotas)
+        Retornar monto * (1 + 0.05 * cuotas)
+
+Clase MasterCardStrategy extiende InterestCalculation
+    Método calcular(monto, cuotas)
+        Retornar monto * (1 + 0.04 * cuotas)
+
+Clase AmexStrategy extiende InterestCalculation
+    Método calcular(monto, cuotas)
+        Retornar monto * (1 + 0.06 * cuotas)
+
+Clase CreditCardFactory
+    Método estático crearEstrategia(marca)
+        Si marca = "visa" Retornar nueva VisaStrategy()
+        Si marca = "mastercard" Retornar nueva MasterCardStrategy()
+        Si marca = "amex" Retornar nueva AmexStrategy()
+        Lanzar error "Tarjeta no soportada"
+
+Clase PaymentProcessor
+    Atributo estrategia: InterestCalculation
+
+    Método processPayment(monto, cuotas)
+        precioFinal ← estrategia.calcular(monto, cuotas)
+        Imprimir "Precio al contado: $" + monto
+        Imprimir "Precio total con intereses: $" + precioFinal
+        Imprimir "Monto por cuota: $" + (precioFinal / cuotas)
+
+Función preguntar(pregunta)
+    Imprimir pregunta
+    Leer respuesta del usuario
+    Retornar respuesta
+
+Función principal()
+    Imprimir "=== Sistema de Pago en Cuotas ==="
+    monto ← preguntar("Ingrese el precio: ")
+    cuotas ← preguntar("Ingrese las cuotas: ")
+    tarjeta ← preguntar("Ingrese la tarjeta (Visa, MasterCard, Amex): ")
+
+    estrategia ← CreditCardFactory.crearEstrategia(tarjeta)
+    procesador ← nueva PaymentProcessor(estrategia)
+    procesador.processPayment(monto, cuotas)
+
+    Imprimir "Proceso finalizado"
+
+principal()
