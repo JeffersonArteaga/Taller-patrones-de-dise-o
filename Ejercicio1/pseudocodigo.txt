@@ -1,0 +1,71 @@
+Inicio
+
+Definir interfaz SortingStrategy:
+    Método sort(lista, orden)
+
+Definir clase BubbleSort que implementa SortingStrategy:
+    Método sort(lista, orden):
+        Crear copia de la lista original (sortedList)
+        Para i desde 0 hasta longitud de la lista:
+            Para j desde 0 hasta longitud de la lista - i - 1:
+                Si (orden es "ascendente" y sortedList[j] > sortedList[j+1]) o
+                   (orden es "descendente" y sortedList[j] < sortedList[j+1]):
+                    Intercambiar sortedList[j] y sortedList[j+1]
+        Retornar sortedList
+
+Definir clase QuickSort que implementa SortingStrategy:
+    Método sort(lista, orden):
+        Si longitud de la lista ≤ 1:
+            Retornar lista
+        Definir pivote como elemento central de la lista
+        Definir listas izquierda, medio y derecha
+        Llenar izquierda con elementos menores (asc) o mayores (desc) que pivote
+        Llenar medio con elementos iguales a pivote
+        Llenar derecha con elementos mayores (asc) o menores (desc) que pivote
+        Retornar concatenación de sort(izquierda), medio y sort(derecha)
+
+Definir clase InsertionSort que implementa SortingStrategy:
+    Método sort(lista, orden):
+        Crear copia de la lista original (sortedList)
+        Para i desde 1 hasta longitud de la lista:
+            Definir key = sortedList[i]
+            Definir j = i - 1
+            Mientras j ≥ 0 y ((orden es "ascendente" y sortedList[j] > key) o 
+                               (orden es "descendente" y sortedList[j] < key)):
+                Mover sortedList[j] a sortedList[j+1]
+                Decrementar j
+            Insertar key en posición correcta
+        Retornar sortedList
+
+Definir clase SortingContext:
+    Atributo strategy
+    Método constructor(strategy):
+        Asignar strategy
+    Método setStrategy(strategy):
+        Asignar strategy
+    Método sort(lista, orden):
+        Retornar strategy.sort(lista, orden)
+
+Definir función ask(pregunta):
+    Mostrar pregunta en consola
+    Retornar respuesta del usuario
+
+Definir función main():
+    Definir lista = [34, 7, 23, 32, 5, 62]
+    Mostrar opciones de algoritmos de ordenamiento
+    Leer opción del usuario
+    Mostrar opciones de orden (asc/desc)
+    Leer orden del usuario
+
+    Según la opción seleccionada:
+        Si opción = 1, estrategia = BubbleSort
+        Si opción = 2, estrategia = QuickSort
+        Si opción = 3, estrategia = InsertionSort
+        Si no, mostrar error y terminar
+
+    Crear contexto de ordenamiento con estrategia seleccionada
+    Ejecutar ordenamiento y mostrar lista ordenada
+
+Ejecutar función main()
+
+Fin
