@@ -1,0 +1,59 @@
+Clase Inventario:
+    Propiedad objetosInventario  
+    Método agregarObjeto(objeto)
+    Método obtenerObjetos()
+    
+Clase ObjetoInventario:
+    Propiedad nombre
+    Método constructor(nombre)
+
+Clase Producto extiende ObjetoInventario
+Clase Almacen extiende ObjetoInventario
+Clase Estanteria extiende ObjetoInventario
+Clase CentroDistribucion extiende ObjetoInventario
+Clase Fabrica extiende ObjetoInventario
+
+Interfaz AlgoritmoAnalisis:
+    Método analizar(inventario)
+
+Clase AlgoritmoBasico implementa AlgoritmoAnalisis:
+    Método analizar(inventario):
+        Imprimir "Aplicando análisis básico"
+
+Clase AlgoritmoAvanzado implementa AlgoritmoAnalisis:
+    Método analizar(inventario):
+        Imprimir "Aplicando análisis avanzado"
+
+
+Clase ControladorInventario:
+    Propiedad inventario
+    Propiedad estrategiaAnalisis
+    
+    Método constructor(inventario):
+        Asignar inventario
+        
+    Método establecerEstrategia(estrategia):
+        Asignar estrategiaAnalisis
+        
+    Método ejecutarAnalisis():
+        Si estrategiaAnalisis es NULO:
+            Imprimir "Error: No hay estrategia de análisis definida"
+        Si no:
+            estrategiaAnalisis.analizar(inventario)
+
+Función principal:
+    Crear instancia de Inventario
+    
+    Crear instancias de Producto, Almacen, Estanteria, CentroDistribucion, Fabrica
+    Agregar objetos al inventario
+    
+    Crear instancia de ControladorInventario con el inventario
+    
+    Establecer estrategia AlgoritmoBasico en el ControladorInventario
+    Ejecutar análisis
+    
+    Establecer estrategia AlgoritmoAvanzado en el ControladorInventario
+    Ejecutar análisis
+    
+
+Ejecutar principal()
